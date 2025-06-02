@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SH Graphic - Ulimwengu wa Ubunifu</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* GENERAL STYLES */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* HEADER STYLES */
+        header {
+            background: linear-gradient(135deg, #92bd25 0%, #004080 100%);
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            height: 60px;
+            margin-right: 20px;
+        }
+        
+        .title-container h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            margin: 5px 0 0;
+            font-style: italic;
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+        
+        /* NAVIGATION STYLES */
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+            text-decoration: none;
+            margin: 5px 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+        
+        .nav-btn i {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        
+        .nav-btn span {
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .nav-btn:hover {
+            background: #0077cc;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .nav-btn.active {
+            background: #0077cc;
+            color: white;
+        }
+        
+        /* MAIN CONTENT STYLES */
+        section {
+            max-width: 1200px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: #0077cc;
+            border-bottom: 2px solid #0077cc;
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        
+        h3 {
+            color: #0077cc;
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+        }
+        
+        /* GALLERY STYLES */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 10px;
+        }
+        
+        .item {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .item-content {
+            padding: 15px;
+        }
+        
+        .item h4 {
+            margin: 0 0 10px 0;
+            color: #444;
+            font-size: 1.1em;
+        }
+        
+        /* ICON BADGES */
+        .icon-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 119, 204, 0.9);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            z-index: 2;
+        }
+        
+        /* DOWNLOAD BUTTONS */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background-color: #0077cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .download-btn:hover {
+            background-color: #005fa3;
+            transform: translateY(-2px);
+        }
+        
+        /* MODAL STYLES */
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #ccc;
+        }
+        
+        /* CONTACT SECTION */
+        #contact p {
+            margin: 10px 0;
+        }
+        
+        #contact a {
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        #contact a:hover {
+            text-decoration: underline;
+        }
+   
+
+        /* RESPONSIVE STYLES */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .nav-container {
+                justify-content: space-around;
+            }
+            
+            .nav-btn {
+                margin: 5px;
+                padding: 8px 10px;
+                font-size: 0.9em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-btn {
+                min-width: 60px;
+                padding: 5px;
+                font-size: 0.8em;
+            }
+            
+            .nav-btn i {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <img src="images/SHA.png" alt="SH Graphic Logo" class="logo">
+        <div class="title-container">
+            <h1>SH GRAPHIC STUDIO</h1>
+            <p class="tagline">Ubunifu wa Hali ya Juu kwa Kila Suluhisho</p>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <div class="nav-container">
+        <a href="#portfolio" class="nav-btn">
+            <i class="fas fa-briefcase"></i>
+            <span>Portfolio</span>
+        </a>
+        
+        <a href="#downloads" class="nav-btn">
+            <i class="fas fa-download"></i>
+            <span>Vifaa</span>
+        </a>
+        
+        <a href="#services" class="nav-btn">
+            <i class="fas fa-cogs"></i>
+            <span>Huduma</span>
+        </a>
+        
+        <a href="#contact" class="nav-btn">
+            <i class="fas fa-envelope"></i>
+            <span>Wasiliana</span>
+        </a>
+    </div>
+</nav>
+
+<main>
+    <section id="portfolio">
+        <h2><i class="fas fa-images"></i> Kazi Zangu (Portfolio)</h2>
+        <div class="gallery">
+            <div class="item">
+                <img src="images/T.png" alt="Logo T" />
+                <div class="item-content">
+                    <h4>Logo T</h4>
+                </div>
+            </div>
+            
+            <div class="item">
+                <img src="images/E.png" alt="Logo E" />
+                <div class="item-content">
+                    <h4>Logo E</h4>
+                </div>
+            </div>
+            
+            <div class="item">
+                <img src="images/F.png" alt="Logo F" />
+                <div class="item-content">
+                    <h4>Logo F</h4>
+                </div>
+            </div>
+            
+            <div class="item">
+                <img src="images/Q.png" alt="Logo Q" />
+                <div class="item-content">
+                    <h4>Logo Q</h4>
+                </div>
+            </div>
+            
+            <div class="item">
+                <img src="images/S.png" alt="Logo S" />
+                <div class="item-content">
+                    <h4>Logo S</h4>
+                </div>
+            </div>
+            
+            <div class="item">
+                <img src="images/X.png" alt="Poster X" />
+                <div class="item-content">
+                    <h4>Poster X</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="downloads">
+        <h2><i class="fas fa-download"></i> Pakua Vifaa</h2>
+
+        <h3><i class="fas fa-font"></i> Fonti</h3>
+        <div class="gallery">
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-font"></i>
+                </div>
+                <img src="images/font1-preview.jpg" alt="Air Travelers Font" />
+                <div class="item-content">
+                    <h4>Air Travelers Font</h4>
+                    <a href="font/air-travelers-font.zip" download class="download-btn">
+                        <i class="fas fa-download"></i> Pakua
+                    </a>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-font"></i>
+                </div>
+                <img src="images/font2-preview.jpg" alt="American Captain Font" />
+                <div class="item-content">
+                    <h4>American Captain</h4>
+                    <a href="font/american-captain-font.zip" download class="download-btn">
+                        <i class="fas fa-download"></i> Pakua
+                    </a>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-font"></i>
+                </div>
+                <img src="images/font3-preview.jpg" alt="Ananda Black Font" />
+                <div class="item-content">
+                    <h4>Ananda Black</h4>
+                    <a href="font/ananda-black-font.zip" download class="download-btn">
+                        <i class="fas fa-download"></i> Pakua
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fas fa-image"></i> Mockups</h3>
+        <div class="gallery">
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-image"></i>
+                </div>
+                <img src="images/mockup1.jpg" alt="Mockup ya Mabango 3" />
+                <div class="item-content">
+                    <h4>Mabango 3 Mjini</h4>
+                    <a href="mockups/Free-Three-Posters-in-the-Big-City-Mockup.zip" download class="download-btn">
+                        <i class="fas fa-download"></i> Pakua
+                    </a>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-image"></i>
+                </div>
+                <img src="images/mockup2.jpg" alt="Mockup ya Citylight" />
+                <div class="item-content">
+                    <h4>Citylight Frame</h4>
+                    <a href="mockups/MD1004_Citylight_Frame_Mockup.zip" download class="download-btn">
+                        <i class="fas fa-download"></i> Pakua
+                    </a>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-image"></i>
+                </div>
+                <img src="images/mockup3.jpg" alt="Mockup ya Laptop" />
+                <div class="item-content">
+                    <h4>Laptop Screen</h4>
+                    <a href="mockups/Laptop-Screen-Mockup-MockupTree.zip" download class="download-btn">
+                        <i class="fas fa-download"></i> Pakua
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+
+        <h3><i class="fas fa-cog"></i> Setups</h3>
+        <div class="gallery">
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <img src="images/setup1.jpg" alt="Photoshop Setup" />
+                <div class="item-content">
+                    <h4>Adobe Photoshop</h4>
+                    <a href="setup/Adobe-Photoshop-Setup.zip" download class="download-btn">
+                        <i class="fas fa-download"></i> Pakua
+                    </a>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <img src="images/setup2.jpg" alt="Illustrator Setup" />
+                <div class="item-content">
+                    <h4>Adobe Illustrator</h4>
+                    <a href="setup/Adobe-Illustrator-Setup.zip" download class="download-btn">
+                        <i class="fas fa-download"></i> Pakua
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2><i class="fas fa-cogs"></i> Huduma Zetu</h2>
+        <div class="gallery">
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-pen-fancy"></i>
+                </div>
+                <img src="images/service1.jpg" alt="Ubunifu wa Logo" />
+                <div class="item-content">
+                    <h4>Ubunifu wa Logo</h4>
+                    <p>Logo za kipekee na zenye ufanisi kwa biashara yako</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="icon-badge">
+                    <i class="fas fa-ad"></i>
+                </div>
+                <img src="images/service2.jpg" alt="Mabango na Matangazo" />
+                <div class="item-content">
+                    <h4>Mabango na Matangazo</h4>
+                    <p>Uumbaji wa matangazo ya kuvutia na yenye ufanisi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2><i class="fas fa-envelope"></i> Wasiliana Nasi</h2>
+        <p><i class="fas fa-user"></i> <strong>Jina:</strong> Abdul Shakur</p>
+        <p><i class="fas fa-phone"></i> <strong>Simu/WhatsApp:</strong> 0697177898</p>
+        <p><i class="fas fa-envelope"></i> <strong>Email:</strong>shakurmallya0@gmail.com</p>
+        <p><i class="fas fa-share-alt"></i> <strong>Social Media:</strong> 
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a> | 
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a> | 
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+        </p>
+    </section>
+</main>
+
+<!-- Modal for viewing large image -->
+<div id="modal">
+    <button class="close-btn">&times;</button>
+    <img src="" alt="Large view" />
+</div>
+
+<script>
+    // Highlight active nav button
+    document.addEventListener('DOMContentLoaded', function() {
+        const navButtons = document.querySelectorAll('.nav-btn');
+        
+        // Set initial active button based on hash
+        if (window.location.hash) {
+            const activeBtn = document.querySelector(`.nav-btn[href="${window.location.hash}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+        } else {
+            navButtons[0].classList.add('active');
+        }
+        
+        navButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Auto highlight on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navButtons.forEach(button => {
+                button.classList.remove('active');
+                if (button.getAttribute('href') === `#${current}`) {
+                    button.classList.add('active');
+                }
+            });
+        });
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('modal');
+    const modalImg = modal.querySelector('img');
+    const closeBtn = modal.querySelector('.close-btn');
+
+    // When any gallery image is clicked, open modal with that image
+    document.querySelectorAll('.gallery img').forEach(img => {
+        img.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close modal when clicking close button
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        modalImg.alt = '';
+        document.body.style.overflow = 'auto';
+    });
+
+    // Close modal when clicking outside the image
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            modalImg.src = '';
+            modalImg.alt = '';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape" && modal.style.display === 'flex') {
+            modal.style.display = 'none';
+            modalImg.src = '';
+            modalImg.alt = '';
+            document.body.style.overflow = 'auto';
+        }
+    });
+</script>
+
+</body>
+</html>
